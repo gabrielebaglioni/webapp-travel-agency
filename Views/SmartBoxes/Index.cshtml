@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>SmartBoxs' list'</h1>
+<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -27,6 +27,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.city)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -40,13 +46,19 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                <img style="width: 50%; border-radius:50%;" src="@item.Image">
+                <img style="width: 50%; border-radius: 50%;" src="@item.Image">
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DurataInNotti)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
