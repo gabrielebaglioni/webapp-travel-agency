@@ -35,7 +35,17 @@ namespace webapp_travel_agency.Models
 
         [Required(ErrorMessage = "Il prezzo e' obbligatorio")]
         [Range(1, 500, ErrorMessage = "Il prezzo della box deve essere incluso tra 1 e 500 euro")]
-        public decimal Price { get; set; }
+
+        public decimal? Price { get; set; }
+
+        [Required(ErrorMessage = "Il campo è obbligatorio")]
+        [StringLength(75, ErrorMessage = "La città non può essere oltre i 75 caratteri")]
+        public string? city { get; set; }
+
+        [Required(ErrorMessage = "Il campo è obbligatorio")]
+        [StringLength(75, ErrorMessage = "Il paese non può essere oltre i 75 caratteri")]
+        public string? Country { get; set; }
+
 
         public SmartBox()
         {

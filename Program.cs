@@ -38,7 +38,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=SmartBoxes}/{action=Index}/{id?}");
+    pattern: "{controller=home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
 app.Run();
