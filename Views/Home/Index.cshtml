@@ -46,7 +46,7 @@
                             SmartBox.innerHTML +=
                                 ` <div class="col-12 col-md-4 p-2">
                                     <div class="card post h-100">
-                                        <a href="/Home/Details/${sb.id}">
+                                       <a href="/Home/Details/${sb.id}">
                                         <img src="${sb.image}" class="card-img-top" alt="...">
                                         <div class="card-body">
                                             <h5 class="card-title">${sb.title}</h5>
@@ -55,7 +55,7 @@
                                             <p class="card-text">Paese: ${sb.country}</p>
                                             <p class="card-text">Città: ${sb.city}</p>
                                         </div>
-                                      </a>    
+                                      </a>
                                     </div>
                                 </div>`
                         } )
@@ -67,13 +67,5 @@
                     console.log(error);
                 })
         }
-        function deleteActor(id) {
-            axios.delete('/api/SmartBoxes/DeleteSmartBox/' + id).then(res => {
-                console.log(res);
-                loadList("");
-                alert('scusa Paolo, mi hai eleminato :(');
-            }).catch(err => {
-                console.log(err);
-                alert('Non posso elimanarla paolooooo!');
-            })
-        }</script>
+         
+</script>

@@ -5,6 +5,7 @@ using System.Numerics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using webapp_travel_agency.Data;
 using webapp_travel_agency.Models;
@@ -124,20 +125,25 @@ namespace webapp_travel_agency.Controllers.API
                 return NotFound();
             }
             var smartBox = await _context.smartBoxes.FindAsync(id);
-            if (smartBox == null)
+            try
+            {
+                _context.smartBoxes.Remove(smartBox);
+                await _context.SaveChangesAsync();
+            }
+            catch (SqlException)
             {
                 return NotFound();
             }
 
-            _context.smartBoxes.Remove(smartBox);
-            await _context.SaveChangesAsync();
+            
 
-            return NoContent();
+            return RedirectToPage("Index");
         }
 
         private bool SmartBoxExists(int id)
         {
             return (_context.smartBoxes?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
     }
 }
