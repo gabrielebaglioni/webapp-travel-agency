@@ -2,8 +2,75 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Home page</h1>
 
+<body onload="cerca()">
+    <div class="container">
+        <input class="js-search" type="text" placeholder="Cerca l'attore" />
+        <div class="row">
+
+        </div>
+    </div>
+    <div class="row js_no_post text-center d-none">
+        <div class="col-12">
+            <h3>Non hai inserito alcun post</h3>
+        </div>
+    </div>
+    <div class="row">
+        @*qui verranno mostrati gli elementi*@
+    </div>
+</body>
+
+
+<script type="text/javascript">
+        const SmartBox = document.querySelector(".row");
+        const Search = document.querySelector(".js-search")
+        let list;
+        Search.addEventListener("keyup", cerca)
+        function cerca() {
+            let name = this.value;
+            risultati(name);
+        }
+        function risultati(name) {
+            axios.get("/api/SmartBoxes/GetSmartBoxes", {
+                params: {
+                    name: name
+                }
+            })
+                .then(function (response) {
+                    console.log(response);
+                    list = response.data;
+                    if (list.length > 0) {
+                        SmartBox.innerHTML = ""
+                        list.forEach(sm => {
+                            SmartBox.innerHTML +=
+                                `<div class="col-4 py-2" >
+                                    <a href="/Home/Details/${sm.id}">
+                                    @*<a href="@Url.Action("Details", "Home", new {Id = actor.id})" class="btn btn-danger my-3">Details*@
+                                        <div class="card bg-danger text-black border-2  rounded-lg" >
+                                            <span class="py-1" >Name ${sm.title}</span>
+                                            <span class="py-1" >Surname ${sm.description}</span>
+                                        </div>
+                                        @*<a asp-action="Delete" asp-route-id="${actor.Id}">Delete</a>*@
+                                        <button onclick="deleteActor(${sm.id})" class="btn btn-danger">Elimina</button>
+                                    </a>
+                                  </div>`
+                        } )
+                    } else {
+                        Actor.innerHTML = "<h1>non ci sono attori</h1>"
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+        }
+        function deleteActor(id) {
+            axios.delete('/api/SmartBoxes/DeleteSmartBox/' + id).then(res => {
+                console.log(res);
+                loadList("");
+                alert('scusa Paolo, mi hai eleminato :(');
+            }).catch(err => {
+                console.log(err);
+                alert('Non posso elimanarla paolooooo!');
+            })
+        }</script>

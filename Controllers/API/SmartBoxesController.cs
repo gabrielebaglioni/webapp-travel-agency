@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,14 +23,32 @@ namespace webapp_travel_agency.Controllers.API
         }
 
         // GET: api/SmartBoxes
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<SmartBox>>> GetsmartBoxes()
+        //{
+        //  if (_context.smartBoxes == null)
+        //  {
+        //      return NotFound();
+        //  }
+        //    return await _context.smartBoxes.ToListAsync();
+        //}
+
+        //get for search
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SmartBox>>> GetsmartBoxes()
+        public IActionResult GetsmartBoxes(string? name)
         {
-          if (_context.smartBoxes == null)
-          {
-              return NotFound();
-          }
-            return await _context.smartBoxes.ToListAsync();
+            IQueryable<SmartBox> smartBoxes;
+
+            if (name != null)
+            {
+                smartBoxes = _context.smartBoxes.Where(x => x.Title.ToLower().Contains(name.ToLower()));
+            }
+            else
+            {
+                smartBoxes = _context.smartBoxes;
+            }
+
+            return Ok(smartBoxes.ToList<SmartBox>());
         }
 
         // GET: api/SmartBoxes/5
