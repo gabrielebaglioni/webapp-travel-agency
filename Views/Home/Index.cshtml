@@ -2,18 +2,18 @@
     ViewData["Title"] = "Home Page";
 }
 
-<h1>Home page</h1>
+<h1>Le Nostre Smart Box</h1>
 
 <body onload="cerca()">
     <div class="container">
-        <input class="js-search" type="text" placeholder="Cerca l'attore" />
+        <input class="js-search" type="text" placeholder="Cerca" />
         <div class="row">
 
         </div>
     </div>
     <div class="row js_no_post text-center d-none">
         <div class="col-12">
-            <h3>Non hai inserito alcun post</h3>
+            <h3>Non hai inserito nessuan smart box</h3>
         </div>
     </div>
     <div class="row">
@@ -42,22 +42,25 @@
                     list = response.data;
                     if (list.length > 0) {
                         SmartBox.innerHTML = ""
-                        list.forEach(sm => {
+                        list.forEach(sb => {
                             SmartBox.innerHTML +=
-                                `<div class="col-4 py-2" >
-                                    <a href="/Home/Details/${sm.id}">
-                                    @*<a href="@Url.Action("Details", "Home", new {Id = actor.id})" class="btn btn-danger my-3">Details*@
-                                        <div class="card bg-danger text-black border-2  rounded-lg" >
-                                            <span class="py-1" >Name ${sm.title}</span>
-                                            <span class="py-1" >Surname ${sm.description}</span>
+                                ` <div class="col-12 col-md-4 p-2">
+                                    <div class="card post h-100">
+                                        <a href="/Home/Details/${sb.id}">
+                                        <img src="${sb.image}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${sb.title}</h5>
+                                            <p class="card-text">${sb.description}</p>
+                                            <p class="card-text">Prezzo: ${sb.price}</p>
+                                            <p class="card-text">Paese: ${sb.country}</p>
+                                            <p class="card-text">Città: ${sb.city}</p>
                                         </div>
-                                        @*<a asp-action="Delete" asp-route-id="${actor.Id}">Delete</a>*@
-                                        <button onclick="deleteActor(${sm.id})" class="btn btn-danger">Elimina</button>
-                                    </a>
-                                  </div>`
+                                      </a>    
+                                    </div>
+                                </div>`
                         } )
                     } else {
-                        Actor.innerHTML = "<h1>non ci sono attori</h1>"
+                        Actor.innerHTML = "<h1>non ci sono Box</h1>"
                     }
                 })
                 .catch(function (error) {
