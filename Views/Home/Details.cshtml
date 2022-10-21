@@ -1,4 +1,5 @@
-﻿<h1>Dettaglio smart box</h1>
+﻿
+<h1>Dettaglio smart box</h1>
 <div class="container">
     <div class="row">
         <div class="col-12">
@@ -7,7 +8,30 @@
         </div>
     </div>
 </div>
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-5">
+            <h2>Contattami</h2>
+            <form onsubmit="InviaMessaggio(event)">
+                <div class="mb-3">
+                    <label for="details-email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="details-email">
+                </div>
+                <div class="mb-3">
+                    <label for="details-title" class="form-label">Titolo</label>
+                    <input type="text" class="form-control" id="details-title">
+                </div>
+                <div class="mb-3">
+                    <label for="details-text" class="form-label">Testo</label>
+                    <textarea class="form-control" id="details-text" rows="10"></textarea>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Invia" />
+            </form>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
+    
     debugger;
     let id = window.location.pathname.split('/')[3];
     axios.get(`/api/SmartBoxes/GetSmartBox/${id}`).then(res => {
@@ -32,5 +56,22 @@
     }).catch(err => {
         console.log(err);
     })
-    
+    function InviaMessaggio(e) {
+        e.preventDefault();
+        axios.post(`/api/message/send/${id}`, {
+          
+            email: document.querySelector('#details-email').value,
+            title: document.querySelector('#details-title').value,
+            text: document.querySelector('#details-text').value,
+        }).then(res => {
+            document.querySelector('#details-email').value = '';
+            document.querySelector('#details-title').value = '';
+            document.querySelector('#details-text').value = '';
+            alert('Messaggio inviato correttamente');
+        }).catch(err => {
+            console.log(err);
+            alert('Scusa Paolo :(');
+        })
+    }
+
 </script>

@@ -19,12 +19,14 @@ public class HomeController : Controller
     }
     public IActionResult Details()
     {
+       
         return View();
     }
 
 
     public IActionResult Privacy()
     {
+        
         return View();
     }
 

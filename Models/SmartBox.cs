@@ -46,6 +46,8 @@ namespace webapp_travel_agency.Models
         [StringLength(75, ErrorMessage = "Il paese non può essere oltre i 75 caratteri")]
         public string? Country { get; set; }
 
+        public List<Message> Messages { get; set; }
+
 
         public SmartBox()
         {

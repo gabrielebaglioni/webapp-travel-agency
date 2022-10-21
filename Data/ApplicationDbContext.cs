@@ -7,6 +7,11 @@ namespace webapp_travel_agency.Data
     public class ApplicationDbContext : IdentityDbContext
     {
         public DbSet<SmartBox>? smartBoxes { get; set; }
+        public DbSet<Message> Messages { get; set; }
+         public ApplicationDbContext()
+        {
+
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

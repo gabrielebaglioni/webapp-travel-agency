@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using webapp_travel_agency.Data;
 
@@ -11,9 +12,10 @@ using webapp_travel_agency.Data;
 namespace webapp_travel_agency.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221021101352_InitialCreateMessageRealation")]
+    partial class InitialCreateMessageRealation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -237,7 +239,10 @@ namespace webapp_travel_agency.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("SmartBoxId")
+                    b.Property<int>("SmarBoxId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SmartBoxId")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
@@ -356,9 +361,7 @@ namespace webapp_travel_agency.Migrations
                 {
                     b.HasOne("webapp_travel_agency.Models.SmartBox", "SmartBox")
                         .WithMany("Messages")
-                        .HasForeignKey("SmartBoxId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SmartBoxId");
 
                     b.Navigation("SmartBox");
                 });
