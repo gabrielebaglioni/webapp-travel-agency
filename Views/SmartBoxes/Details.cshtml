@@ -58,7 +58,7 @@
 @if (Model.Messages.Count > 0)
 {
     <table class="table">
-        <thead class="text-primary">
+        <thead class="text-secondary">
             <tr>
                 <th>Messagi Clieneti</th>
                 <th>Titolo</th>
@@ -68,7 +68,7 @@
         <tbody>
             @foreach (Message e in Model.Messages)
             {
-                <tr class="text-primary">
+                <tr class="text-secondary">
                     <td>@e.Email</td>
                     <td>@e.Title</td>
                     <td>@e.Text</td>
