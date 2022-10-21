@@ -37,8 +37,7 @@ namespace webapp_travel_agency.Controllers
                 return NotFound();
             }
 
-            var smartBox = await _context.smartBoxes
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var smartBox = await _context.smartBoxes.Include("Messages").FirstOrDefaultAsync(m => m.Id == id);
             if (smartBox == null)
             {
                 return NotFound();

@@ -13,10 +13,10 @@ namespace webapp_travel_agency.Controllers.API
   
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class MessageController : ControllerBase
+    public class MessagesController : ControllerBase
     {
         ApplicationDbContext _ctx;
-        public MessageController()
+        public MessagesController()
         {
             _ctx = new ApplicationDbContext();
         }

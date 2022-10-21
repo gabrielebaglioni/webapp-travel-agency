@@ -1,4 +1,4 @@
-﻿
+﻿@model SmartBox
 <h1>Dettaglio smart box</h1>
 <div class="container">
     <div class="row">
@@ -45,6 +45,7 @@
                         <h5 class="card-title">${sb.title}</h5>
                         <p class="card-text">${sb.description}</p>
                         <p class="card-text">Prezzo: ${sb.price}</p>
+                        <p class="card-text">Notti: ${sb.DurataInNotti}</p>
                         <p class="card-text">Paese: ${sb.country}</p>
                         <p class="card-text">Città: ${sb.city}</p>
                     </div>
@@ -58,7 +59,7 @@
     })
     function InviaMessaggio(e) {
         e.preventDefault();
-        axios.post(`/api/message/send/${id}`, {
+        axios.post(`/api/messages/send/${id}`, {
           
             email: document.querySelector('#details-email').value,
             title: document.querySelector('#details-title').value,
